@@ -2854,15 +2854,29 @@ h3, h4, h5 {
 }
 
 /* line 1, ../../../src/styles/sass/_game.sass */
+main {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  justify-content: center;
+}
+
+/* line 8, ../../../src/styles/sass/_game.sass */
+.playersMenu label {
+  min-width: 120px;
+  text-align: right;
+}
+
+/* line 13, ../../../src/styles/sass/_game.sass */
 .game {
   display: box;
   align-elements: center;
 }
-/* line 5, ../../../src/styles/sass/_game.sass */
+/* line 17, ../../../src/styles/sass/_game.sass */
 .game .row {
   height: 10%;
 }
-/* line 8, ../../../src/styles/sass/_game.sass */
+/* line 20, ../../../src/styles/sass/_game.sass */
 .game .piece {
   position: relative;
   border-radius: 50%;
@@ -2877,7 +2891,7 @@ h3, h4, h5 {
   -webkit-box-shadow: inset 3px 3px 7px #d1d1d1;
   box-shadow: inset 3px 3px 7px #d1d1d1;
 }
-/* line 22, ../../../src/styles/sass/_game.sass */
+/* line 34, ../../../src/styles/sass/_game.sass */
 .game .piece.selected {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
