@@ -15,6 +15,14 @@
                     data: {
                         pageTitle: 'Test View'
                     }
+                })
+                .state('game', {
+                    url: '/game',
+                    templateUrl: 'src/views/connect4.html',
+                    controller: 'GameController',
+                    data: {
+                        pageTitle: 'Game View'
+                    }
                 });
 
         }).run(function($rootScope) {

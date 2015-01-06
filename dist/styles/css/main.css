@@ -2853,7 +2853,39 @@ h3, h4, h5 {
   content: "\f20c";
 }
 
-/* line 12, ../../../src/styles/sass/main.sass */
+/* line 1, ../../../src/styles/sass/_game.sass */
+.game {
+  display: box;
+  align-elements: center;
+}
+/* line 5, ../../../src/styles/sass/_game.sass */
+.game .row {
+  height: 10%;
+}
+/* line 8, ../../../src/styles/sass/_game.sass */
+.game .piece {
+  position: relative;
+  border-radius: 50%;
+  width: 11%;
+  padding-bottom: 11%;
+  border: 1px solid #f1f1f1;
+  display: inline-block;
+  margin: 1%;
+  -webkit-transition: 1s;
+  transition: 1s;
+  -moz-box-shadow: inset 3px 3px 7px #d1d1d1;
+  -webkit-box-shadow: inset 3px 3px 7px #d1d1d1;
+  box-shadow: inset 3px 3px 7px #d1d1d1;
+}
+/* line 22, ../../../src/styles/sass/_game.sass */
+.game .piece.selected {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+/*col-xs-12 col-sm-6 col-md-3 col-lg-3 */
+/* line 13, ../../../src/styles/sass/main.sass */
 html, body {
   font-family: "Montserrat", sans-serif;
 }
