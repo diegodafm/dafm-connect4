@@ -5,7 +5,7 @@
     angular.module('connect4')
         .config(function config($stateProvider, $urlRouterProvider) {
 
-            $urlRouterProvider.otherwise('/test');
+            $urlRouterProvider.otherwise('/home');
 
             $stateProvider
                 .state('test', {
@@ -16,12 +16,20 @@
                         pageTitle: 'Test View'
                     }
                 })
+                .state('players', {
+                    url: '/players',
+                    templateUrl: 'src/views/players.html',
+                    controller: 'PlayersController',
+                    data: {
+                        pageTitle: 'Players'
+                    }
+                })
                 .state('game', {
                     url: '/game',
                     templateUrl: 'src/views/connect4.html',
                     controller: 'GameController',
                     data: {
-                        pageTitle: 'Game View'
+                        pageTitle: 'Game'
                     }
                 });
 

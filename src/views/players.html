@@ -1,0 +1,47 @@
+	
+	<section class="playersMenu row" ng-hide="players.player1.ready && players.player2.ready">
+		<header>Waiting players</header>		
+
+		<aside class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+			<div ng-hide="players.player1.ready">
+				<div class="row">
+					<label>Player 1</label> 
+					<input type="text" placeholder="Nickname" ng-model="players.player1.nickname" />
+				</div>
+				<div class="row">
+					<label>Color</label> <input type="text"  ng-model="players.player1.color" /> <br clear="all"/>		
+				</div>
+				<div class="row">
+					<label>&nbsp;</label> <button class="btn btn-primary" ng-click="validatePlayer(players.player1)">Confirm</button>
+				</div>
+			</div>   
+
+			<div ng-show="players.player1.ready">
+				Player ready!
+			</div>
+
+		</aside> 
+
+		<aside class="col-xs-12 col-sm-6 col-md-6 col-lg-6">	
+			<div ng-hide="players.player2.ready">
+				<div class="row">
+					<label>Player 2</label> 
+					<input type="text" placeholder="Nickname" ng-model="players.player2.nickname" />
+				</div>
+				<div class="row">
+					<label>Color</label> <input type="text"  ng-model="players.player2.color" /> <br clear="all"/>		
+				</div>
+				<div class="row">
+					<label>&nbsp;</label> <button class="btn btn-primary" ng-click="validatePlayer(players.player2)">Confirm</button>
+				</div>
+			</div>
+
+			<div ng-show="players.player2.ready">
+				Player ready!
+			</div>
+
+			
+		</aside> 
+
+	</section>

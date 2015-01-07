@@ -1,79 +1,30 @@
 <main>
-<section class="game col-xs-12 col-sm-10 col-md-8 col-lg-6">
-	<header ng-show="player1.ready && player2.ready">
+	<section class="game col-xs-12 col-sm-10 col-md-8 col-lg-6">
+		<header class="row" ng-show="players.player1.ready && players.player2.ready">
 
-		<aside class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-show="player1.ready">
-			<div class="row">
-				{{player1.nickname}}
+			<aside class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-show="players.player1.ready">
+				<div class="row">
+					{{players.player1.nickname}}
 
-				{{getCurrentPlayer() === player1}}
-			</div>
-		</aside>	
+					{{getCurrentPlayer() === players.player1}}
+				</div>
+			</aside>	
 
-		<aside class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-show="player2.ready">
-			<div class="row">
-				{{player2.nickname}}
-			</div>
-		</aside>	
+			<aside class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-show="players.player2.ready">
+				<div class="row">
+					{{players.player2.nickname}}
+					{{getCurrentPlayer() === players.player2}}
+				</div>
+			</aside>	
 
-	</header>	
+		</header>	
+
 		
 
-	<div class="row" ng-repeat="line in matrix">
-
-		<piece ng-click="checkAvailability(item.line,item.column)" ng-repeat="item in line" item="{{item}}"></piece>
-
-	</div>	
-
-	<section class="playersMenu row" ng-hide="player1.ready && player2.ready">
-		<header>Waiting players</header>
-
-		<aside class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-
-			<div ng-hide="player1.ready">
-				<div class="row">
-					<label>Player 1</label> 
-					<input type="text" placeholder="Nickname" ng-model="player1.nickname" />
-				</div>
-				<div class="row">
-					<label>Color</label> <input type="text"  ng-model="player1.color" /> <br clear="all"/>		
-				</div>
-				<div class="row">
-					<label>&nbsp;</label> <button class="btn btn-primary" ng-click="validatePlayer(player1)">Confirm</button>
-				</div>
-			</div>   
-
-			<div ng-show="player1.ready">
-				Player ready!
-			</div>
-
-		</aside> 
-
-		<aside class="col-xs-6 col-sm-6 col-md-6 col-lg-6">	
-			<div ng-hide="player2.ready">
-				<div class="row">
-					<label>Player 2</label> 
-					<input type="text" placeholder="Nickname" ng-model="player2.nickname" />
-				</div>
-				<div class="row">
-					<label>Color</label> <input type="text"  ng-model="player2.color" /> <br clear="all"/>		
-				</div>
-				<div class="row">
-					<label>&nbsp;</label> <button class="btn btn-primary" ng-click="validatePlayer(player2)">Confirm</button>
-				</div>
-			</div>
-
-			<div ng-show="player2.ready">
-				Player ready!
-			</div>
-
-			
-		</aside> 
-
+		<div id="matrix">
+			<div class="row" ng-repeat="line in matrix">
+				<piece ng-click="checkAvailability(item.line,item.column)" ng-repeat="item in line" item="{{item}}"></piece>
+			</div>	
+		</div>
 	</section>
-
-</section>
-
-
-
 </main>

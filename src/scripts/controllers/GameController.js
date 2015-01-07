@@ -2,15 +2,9 @@
  * Created by Diego Alisson on 12/15/14.
  */
 angular.module('connect4')
-    .controller('GameController', function($scope) {
+    .controller('GameController', function($scope, $location, PlayersFactory) {
 
-        $scope.player1 = {
-            ready: false
-        };
-
-        $scope.player2 = {
-            ready: false
-        };
+        $scope.players = PlayersFactory.players;
 
         $scope.matrix = [];
 
@@ -57,7 +51,7 @@ angular.module('connect4')
         };
 
         $scope.isReady = function() {
-            if ($scope.player1.ready && $scope.player2.ready) {
+            if ($scope.players.player1.ready && $scope.players.player2.ready) {
                 return true;
             }
         };
@@ -77,9 +71,9 @@ angular.module('connect4')
 
         $scope.startGame = function() {
             if ((Math.floor(Math.random() * 2) + 1) === 1) {
-                $scope.currentPlayer = $scope.player2;
+                $scope.currentPlayer = $scope.players.player2;
             } else {
-                $scope.currentPlayer = $scope.player1;
+                $scope.currentPlayer = $scope.players.player1;
             }
         };
 
@@ -88,11 +82,16 @@ angular.module('connect4')
         };
 
         $scope.switchPlayer = function() {
-            if ($scope.currentPlayer === $scope.player1) {
-                $scope.currentPlayer = $scope.player2;
+            if ($scope.currentPlayer === $scope.players.player1) {
+                $scope.currentPlayer = $scope.players.player2;
             } else {
-                $scope.currentPlayer = $scope.player1;
+                $scope.currentPlayer = $scope.players.player1;
             }
         };
 
+        if ($scope.isReady()) {
+            $scope.startGame();
+        } else {
+            $location.path('/players');
+        }
     });

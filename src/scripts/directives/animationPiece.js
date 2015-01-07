@@ -4,7 +4,7 @@
      */
     angular
         .module('connect4')
-        .directive('piece', function() {
+        .directive('animationPiece', function() {
             return {
                 restrict: 'AE',
                 replace: 'true',
@@ -14,32 +14,10 @@
                 },
                 link: function(scope, el) {
 
-                    function createAnimatedPiece() {
-                        var evalItem = scope.$eval(scope.item);
-
-                        var div = window.document.createElement('div');
-                        $(div).addClass('piece animated');
-                        $(div).css({
-                            top: ($(el).offset().top * -1),
-                            opacity: 0,
-                            backgroundColor: evalItem.player.color
-                        });
-
-
-                        $(el).append(div);
-
-                        $(div).animate({
-                            top: 0,
-                            opacity: 1
-
-
-                        }, 500, function() {
-                            render();
-                        });
-                    }
-
                     function render() {
+
                         var evalItem = scope.$eval(scope.item);
+
                         if (!evalItem.available) {
                             $(el).addClass('selected');
                             $(el).css({
@@ -47,18 +25,13 @@
                             });
                         }
 
-                        $('.piece.animated').remove();
                     }
 
                     //key point here to watch for changes of the type property
                     scope.$watch('item', function(newValue, oldValue) {
-                        console.log('newValue');
                         console.log(newValue);
-                        console.log('oldValue');
                         console.log(oldValue);
-                        if (newValue !== oldValue) {
-                            createAnimatedPiece();
-                        }
+                        render();
                     });
                 }
             };
