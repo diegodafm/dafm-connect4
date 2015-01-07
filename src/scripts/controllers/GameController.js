@@ -2,9 +2,9 @@
  * Created by Diego Alisson on 12/15/14.
  */
 angular.module('connect4')
-    .controller('GameController', function($scope, $location, PlayersFactory) {
+    .controller('GameController', function($scope, $location, PlayerFactory, MoveFactory) {
 
-        $scope.players = PlayersFactory.players;
+        $scope.players = PlayerFactory.players;
 
         $scope.matrix = [];
 
@@ -40,7 +40,18 @@ angular.module('connect4')
                 for (var j = 7 - 1; j >= 0; j--) {
                     if (j === column) {
                         if ($scope.matrix[i][j].available) {
-                            $scope.matrix[i][j].player = $scope.getCurrentPlayer();
+
+                            var move = {
+                                player: $scope.getCurrentPlayer(),
+                                position: {
+                                    line: i,
+                                    column: j
+                                }
+                            };
+
+                            MoveFactory.addMove(move);
+
+                            $scope.matrix[i][j].move = move;
                             $scope.matrix[i][j].available = false;
                             $scope.switchPlayer();
                             return;
@@ -48,6 +59,15 @@ angular.module('connect4')
                     }
                 }
             }
+        };
+
+        $scope.updatePiece = function(move) {
+            $scope.matrix[move.position.line][move.position.column].move = move;
+        };
+
+        $scope.deletePiece = function(move) {
+            $scope.matrix[move.position.line][move.position.column].available = true;
+            $scope.matrix[move.position.line][move.position.column].move = null;
         };
 
         $scope.isReady = function() {
@@ -87,6 +107,11 @@ angular.module('connect4')
             } else {
                 $scope.currentPlayer = $scope.players.player1;
             }
+        };
+
+        $scope.undo = function() {
+            var move = MoveFactory.undoMove();
+            $scope.deletePiece(move);
         };
 
         if ($scope.isReady()) {

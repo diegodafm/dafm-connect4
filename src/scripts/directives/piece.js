@@ -10,21 +10,20 @@
                 replace: 'true',
                 template: '<div class=\'piece\' ng-class=\'\'></div>',
                 scope: {
-                    item: '@'
+                    model: '@'
                 },
                 link: function(scope, el) {
 
                     function createAnimatedPiece() {
-                        var evalItem = scope.$eval(scope.item);
+                        var evalModel = scope.$eval(scope.model);
 
                         var div = window.document.createElement('div');
                         $(div).addClass('piece animated');
                         $(div).css({
                             top: ($(el).offset().top * -1),
                             opacity: 0,
-                            backgroundColor: evalItem.player.color
+                            backgroundColor: evalModel.move.player.color
                         });
-
 
                         $(el).append(div);
 
@@ -39,25 +38,50 @@
                     }
 
                     function render() {
-                        var evalItem = scope.$eval(scope.item);
-                        if (!evalItem.available) {
+                        var evalModel = scope.$eval(scope.model);
+                        if (!evalModel.available) {
                             $(el).addClass('selected');
                             $(el).css({
-                                backgroundColor: evalItem.player.color
+                                backgroundColor: evalModel.move.player.color
                             });
                         }
 
                         $('.piece.animated').remove();
                     }
 
-                    //key point here to watch for changes of the type property
-                    scope.$watch('item', function(newValue, oldValue) {
-                        console.log('newValue');
-                        console.log(newValue);
-                        console.log('oldValue');
-                        console.log(oldValue);
+                    function removePiece() {
+
+                        var div = window.document.createElement('div');
+                        $(div).addClass('piece animated');
+                        $(div).css({
+                            backgroundColor: $(el).css('backgroundColor')
+                        });
+
+                        $(el).append(div);
+
+                        $(el).removeClass('selected');
+                        $(el).css({
+                            backgroundColor: 'transparent'
+                        });
+                        $(div).animate({
+                            top: ($(el).offset().top * -1),
+                            opacity: 0
+                        }, 500, function() {
+
+                        });
+
+
+                    }
+
+                    scope.$watch('model', function(newValue, oldValue) {
                         if (newValue !== oldValue) {
-                            createAnimatedPiece();
+                            var evalModel = scope.$eval(scope.model);
+                            if (evalModel.move === null) {
+                                removePiece();
+                            } else {
+                                createAnimatedPiece();
+                            }
+
                         }
                     });
                 }

@@ -2,9 +2,9 @@
  * Created by Diego Alisson on 12/15/14.
  */
 angular.module('connect4')
-    .controller('PlayersController', function($scope, $location, PlayersFactory) {
+    .controller('PlayersController', function($scope, $location, PlayerFactory) {
 
-        $scope.players = PlayersFactory.players;
+        $scope.players = PlayerFactory.players;
 
 
         $scope.isReady = function() {

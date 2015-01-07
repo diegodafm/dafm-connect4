@@ -23,8 +23,12 @@
 
 		<div id="matrix">
 			<div class="row" ng-repeat="line in matrix">
-				<piece ng-click="checkAvailability(item.line,item.column)" ng-repeat="item in line" item="{{item}}"></piece>
+				<piece ng-click="checkAvailability(item.line,item.column)" ng-repeat="item in line" model="{{item}}"></piece>
 			</div>	
 		</div>
+
+		<header class="row" ng-show="players.player1.ready && players.player2.ready">
+			<button class="btn btn-primary" ng-click="undo()">Undo</button>
+		</header>
 	</section>
 </main>

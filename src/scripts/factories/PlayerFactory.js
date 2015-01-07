@@ -3,17 +3,17 @@
  */
 (function() {
     angular.module('connect4')
-        .factory('PlayersFactory', function() {
+        .factory('PlayerFactory', function() {
             return {
                 players: {
                     player1: {
-                        nickname: 'diego',
-                        color: '#66aa00',
+                        nickname: 'Diego',
+                        color: '#00aa66',
                         ready: false
                     },
                     player2: {
-                        nickname: 'cassia',
-                        color: '#99aa00',
+                        nickname: 'Cassia',
+                        color: '#995500',
                         ready: false
                     }
                 }
