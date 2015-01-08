@@ -69,7 +69,19 @@
                         }, 500, function() {
 
                         });
+                    }
 
+                    function renderWinnerMove() {
+                        var evalModel = scope.$eval(scope.model);
+                        var div = window.document.createElement('div');
+                        
+                        $(div).addClass('piece winnerMove');
+                        $(el).append(div);
+
+                        $(el).addClass('selected');
+                        $(el).css({
+                            backgroundColor: evalModel.move.player.color
+                        });
 
                     }
 
@@ -78,6 +90,8 @@
                             var evalModel = scope.$eval(scope.model);
                             if (evalModel.move === null) {
                                 removePiece();
+                            } else if (evalModel.move.winnerMove) {
+                                renderWinnerMove();
                             } else {
                                 createAnimatedPiece();
                             }

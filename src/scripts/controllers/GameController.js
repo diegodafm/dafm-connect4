@@ -41,9 +41,11 @@ angular.module('connect4')
 
                             var findWinnerMove = GameRulesService.findWinnerMove($scope.matrix);
                             if (findWinnerMove && findWinnerMove.hasWinner) {
-                                alert('create directive to show winner!');
+                                $scope.showWinnerMove(findWinnerMove.moves);
+                                $scope.winner = findWinnerMove.winner;
+                            } else {
+                                $scope.switchPlayer();
                             }
-                            $scope.switchPlayer();
                             return;
                         }
                     }
@@ -51,12 +53,12 @@ angular.module('connect4')
             }
         };
 
-        $scope.showWinnerMove = function() {
-
-        };
-
-        $scope.updatePiece = function(move) {
-            $scope.matrix[move.position.line][move.position.column].move = move;
+        $scope.showWinnerMove = function(moves) {
+            for (var i = moves.length - 1; i >= 0; i--) {
+                var move = moves[i];
+                move.winnerMove = true;
+                $scope.matrix[move.position.line][move.position.column].move = move;
+            }
         };
 
         $scope.deletePiece = function(move) {
@@ -100,8 +102,6 @@ angular.module('connect4')
             var move = MoveFactory.undoMove();
             $scope.deletePiece(move);
         };
-
-
 
 
         if ($scope.isReady()) {

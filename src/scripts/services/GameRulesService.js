@@ -17,7 +17,8 @@
                 if (count === 4) {
                     return {
                         hasWinner: true,
-                        moves: movesList
+                        moves: movesList,
+                        winner: movesList[0].player
                     };
                 } else {
                     return {
@@ -34,12 +35,12 @@
                     var movesList = [];
 
                     if (piece.column >= 3) {
-                        movesList.push(piece);
+                        movesList.push(piece.move);
 
                         for (var i = 1; i <= 3; i++) {
                             if (!matrix[piece.line][piece.column - i].available) {
                                 if (piece.move.player.nickname === matrix[piece.line][piece.column - i].move.player.nickname) {
-                                    movesList.push(matrix[piece.line][piece.column - i]);
+                                    movesList.push(matrix[piece.line][piece.column - i].move);
                                     count++;
                                 } else {
                                     break;
@@ -70,10 +71,10 @@
                     var movesList = [];
                     if (piece.line >= 3) {
                         for (var i = 1; i <= 3; i++) {
-                            movesList.push(piece);
+                            movesList.push(piece.move);
                             if (!matrix[piece.line - i][piece.column].available) {
                                 if (piece.move.player.nickname === matrix[piece.line - i][piece.column].move.player.nickname) {
-                                    movesList.push(matrix[piece.line - i][piece.column]);
+                                    movesList.push(matrix[piece.line - i][piece.column].move);
                                     count++;
                                 } else {
                                     break;
@@ -103,10 +104,10 @@
                     var movesList = [];
                     if (piece.line >= 3 && piece.column >= 3) {
                         for (var i = 1; i <= 3; i++) {
-                            movesList.push(piece);
+                            movesList.push(piece.move);
                             if (!matrix[piece.line - i][piece.column - i].available) {
                                 if (piece.move.player.nickname === matrix[piece.line - i][piece.column - i].move.player.nickname) {
-                                    movesList.push(matrix[piece.line - i][piece.column - i]);
+                                    movesList.push(matrix[piece.line - i][piece.column - i].move);
                                     count++;
                                 } else {
                                     break;
@@ -121,11 +122,11 @@
                     var count = 1;
                     var movesList = [];
                     if (piece.line >= 3 && piece.column <= 3) {
-                        movesList.push(piece);
+                        movesList.push(piece.move);
                         for (var i = 1; i <= 3; i++) {
                             if (!matrix[piece.line - i][piece.column + i].available) {
                                 if (piece.move.player.nickname === matrix[piece.line - i][piece.column + i].move.player.nickname) {
-                                    movesList.push(matrix[piece.line - i][piece.column + i]);
+                                    movesList.push(matrix[piece.line - i][piece.column + i].move);
                                     count++;
                                 } else {
                                     break;
