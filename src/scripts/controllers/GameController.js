@@ -2,7 +2,7 @@
  * Created by Diego Alisson on 12/15/14.
  */
 angular.module('connect4')
-    .controller('GameController', function($scope, $location, PlayerFactory, MoveFactory) {
+    .controller('GameController', function($scope, $location, GameRulesService, PlayerFactory, MoveFactory) {
 
         $scope.players = PlayerFactory.players;
 
@@ -39,16 +39,20 @@ angular.module('connect4')
                             $scope.matrix[i][j].move = move;
                             $scope.matrix[i][j].available = false;
 
-                            validateHorizontally();
-                            validateVertically();
-                            validateDiagonally();
-
+                            var findWinnerMove = GameRulesService.findWinnerMove($scope.matrix);
+                            if (findWinnerMove && findWinnerMove.hasWinner) {
+                                alert('create directive to show winner!');
+                            }
                             $scope.switchPlayer();
                             return;
                         }
                     }
                 }
             }
+        };
+
+        $scope.showWinnerMove = function() {
+
         };
 
         $scope.updatePiece = function(move) {
@@ -98,112 +102,7 @@ angular.module('connect4')
         };
 
 
-        function validateHorizontally() {
-            var count = 1;
-            for (var i = $scope.matrix.length - 1; i >= 0; i--) {
-                for (var j = $scope.matrix[i].length - 1; j >= 0; j--) {
-                    if (!$scope.matrix[i][j].available && ($scope.matrix[i][j - 1] && !$scope.matrix[i][j - 1].available)) {
-                        if ($scope.matrix[i][j].move.player.nickname === $scope.matrix[i][j - 1].move.player.nickname) {
-                            count++;
-                        } else {
-                            count = 1;
-                        }
-                        if (count === 4) {
-                            console.log($scope.matrix[i][j]);
-                            console.log('winner ' + $scope.matrix[i][j].move.player.nickname);
-                            return;
-                        }
 
-                    }
-                }
-            }
-        }
-
-        function validateVertically() {
-
-            function verticalBottom2Top(piece) {
-                if (piece.line <= 3) {
-                    for (var i = 1; i <= 3; i++) {
-
-                    }
-                }
-
-            }
-
-            for (var i = $scope.matrix.length - 1; i >= 0; i--) {
-                for (var j = $scope.matrix[i].length - 1; j >= 0; j--) {
-
-
-                    if (!$scope.matrix[i][j].available) {
-                        verticalBottom2Top($scope.matrix[i][j]);
-                    }
-
-                    /*
-                                         && ($scope.matrix[i - 1][j] && !$scope.matrix[i - 1][j].available)) {
-                                            if ($scope.matrix[i][j].move.player.nickname === $scope.matrix[i - 1][j].move.player.nickname) {
-                                                count++;
-                                            } else {
-                                                count = 1;
-                                            }
-                                            if (count === 4) {
-                                                console.log('winner ' + $scope.matrix[i][j].move.player.nickname);
-                                                return;
-                                            }
-                                        }
-                                        */
-                }
-            }
-        }
-
-        function validateDiagonally() {
-
-            function diagonalBottomLeft(piece) {
-                var count = 1;
-                if (piece.line >= 3 && piece.column >= 3) {
-                    for (var i = 1; i <= 3; i++) {
-                        if (!$scope.matrix[piece.line - i][piece.column - i].available) {
-                            if (piece.move.player.nickname === $scope.matrix[piece.line - i][piece.column - i].move.player.nickname) {
-                                count++;
-                            } else {
-                                count = 1;
-                            }
-                            if (count === 4) {
-                                console.log('winner ' + piece.move.player.nickname);
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-
-            function diagonalBottomRight(piece) {
-                var count = 1;
-                if (piece.line >= 3 && piece.column <= 3) {
-                    for (var i = 1; i <= 3; i++) {
-                        if (!$scope.matrix[piece.line - i][piece.column + i].available) {
-                            if (piece.move.player.nickname === $scope.matrix[piece.line - i][piece.column + i].move.player.nickname) {
-                                count++;
-                            } else {
-                                count = 1;
-                            }
-                            if (count === 4) {
-                                console.log('winner ' + piece.move.player.nickname);
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-
-            for (var i = $scope.matrix.length - 1; i >= 0; i--) {
-                for (var j = $scope.matrix[i].length - 1; j >= 0; j--) {
-                    if (!$scope.matrix[i][j].available) {
-                        diagonalBottomLeft($scope.matrix[i][j]);
-                        diagonalBottomRight($scope.matrix[i][j]);
-                    }
-                }
-            }
-        }
 
         if ($scope.isReady()) {
             $scope.startGame();
