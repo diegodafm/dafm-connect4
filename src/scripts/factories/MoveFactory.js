@@ -12,14 +12,30 @@
                 },
 
                 undoMove: function() {
-                    var move = moves[moves.length - 1];
-                    moves.pop();
-                    return move;
+                    if (moves.length > 0) {
+                        var move = moves[moves.length - 1];
+                        moves.pop();
+                        return move;
+                    } else {
+                        return null;
+                    }
                 },
 
                 forwardMove: function() {
 
+                },
+
+                getMovesByPlayer: function(player) {
+                    var playerMoves = [];
+                    for (var i = moves.length - 1; i >= 0; i--) {
+                        if (moves[i].player.nickname === player.nickname) {
+                            playerMoves.push(moves[i]);
+                        }
+                    }
+                    return playerMoves;
                 }
+
+
             };
         });
 }());

@@ -6,14 +6,14 @@
 				<div class="row">
 					{{players.player1.nickname}}
 
-					{{getCurrentPlayer() === players.player1}}
+					<button userTimeout class="btn btn-primary" ng-click="undo()" ng-show="isCurrentPlayer(players.player1)">Undo</button>
 				</div>
 			</aside>	
 
 			<aside class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-show="players.player2.ready">
 				<div class="row">
 					{{players.player2.nickname}}
-					{{getCurrentPlayer() === players.player2}}
+					<button userTimeout class="btn btn-primary" ng-click="undo()" ng-show="isCurrentPlayer(players.player2)">Undo</button>
 				</div>
 			</aside>	
 
@@ -23,12 +23,9 @@
 
 		<div id="matrix">
 			<div class="row" ng-repeat="line in matrix">
-				<piece ng-click="checkAvailability(item.line,item.column)" ng-repeat="item in line" model="{{item}}"></piece>
+				<piece ng-click="updateLowestPiece(item.line,item.column)" ng-repeat="item in line" model="{{item}}"></piece>
 			</div>	
 		</div>
 
-		<header class="row" ng-show="players.player1.ready && players.player2.ready">
-			<button class="btn btn-primary" ng-click="undo()">Undo</button>
-		</header>
 	</section>
 </main>
