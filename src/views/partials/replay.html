@@ -1,0 +1,37 @@
+<section  class="popup">
+	<main>
+		<section class="game col-xs-12 col-sm-10 col-md-8 col-lg-6">
+			<header class="row" ng-show="players.player1.ready && players.player2.ready">
+				<aside class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-show="players.player1.ready">
+					<div class="row">
+						{{players.player1.nickname}}
+					</div>
+				</aside>	
+				<aside class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-show="players.player2.ready">
+					<div class="row">
+						{{players.player2.nickname}}
+					</div>
+				</aside>	
+			</header>	
+			<div id="matrix">
+				<div class="row" ng-repeat="line in matrix">
+					<piece-replay ng-repeat="item in line" model="{{item}}"></piece-replay>
+				</div>	
+			</div>
+		</section>
+	</main>
+
+	<nav  ng-hide="playing">
+		<section class="speedControl">
+			<span btn-radio="'4000'" ng-model="speed" >Slow</span>
+			<span btn-radio="'2000'" ng-model="speed" >Normal</span>
+			<span btn-radio="'1000'" ng-model="speed" >Faster</span>
+			<span btn-radio="'500'" ng-model="speed" >Super Faster</span>
+
+			{{speed}}
+		</section>
+		<section class="playControl">
+			<button class="btn btn-primary" ng-click="replay()">Replay again</button>
+		</section>
+	</nav>
+</section>

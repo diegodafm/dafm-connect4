@@ -25,6 +25,10 @@
 
                 },
 
+                getMoves: function() {
+                    return moves;
+                },
+
                 getMovesByPlayer: function(player) {
                     var playerMoves = [];
                     for (var i = moves.length - 1; i >= 0; i--) {

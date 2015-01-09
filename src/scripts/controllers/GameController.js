@@ -2,7 +2,7 @@
  * Created by Diego Alisson on 12/15/14.
  */
 angular.module('connect4')
-    .controller('GameController', function($scope, $location, GameRulesService, PlayerFactory, MoveFactory) {
+    .controller('GameController', function($scope, $location, $modal, GameRulesService, PlayerFactory, MoveFactory) {
 
         $scope.players = PlayerFactory.players;
 
@@ -33,9 +33,7 @@ angular.module('connect4')
                                     column: j
                                 }
                             };
-
                             MoveFactory.addMove(move);
-
                             $scope.matrix[i][j].move = move;
                             $scope.matrix[i][j].available = false;
 
@@ -101,7 +99,25 @@ angular.module('connect4')
         $scope.undo = function() {
             var move = MoveFactory.undoMove();
             $scope.deletePiece(move);
+            $scope.switchPlayer();
         };
+
+        $scope.replay = function() {
+            showReplayModal();
+        };
+
+        function showReplayModal() {
+            var modalInstance = $modal.open({
+                templateUrl: 'src/views/partials/replay.html',
+                controller: 'ReplayGameController'
+            });
+
+            modalInstance.result.then(function() {
+
+            }, function() {
+
+            });
+        }
 
 
         if ($scope.isReady()) {
