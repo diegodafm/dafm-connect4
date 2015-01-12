@@ -146,6 +146,10 @@ angular.module('connect4')
             });
         }
 
+        $scope.undoCondition = function() {
+            return (!$scope.isOver && MoveFactory.getMoves().length > 0);
+        };
+
 
         if ($scope.isReady()) {
             $scope.startGame();

@@ -2949,7 +2949,24 @@ main {
   left: 0;
 }
 
-/* line 16, ../../../src/styles/sass/main.sass */
+/* line 2, ../../../src/styles/sass/_home.sass */
+nav.socialLinks a {
+  text-decoration: none;
+  color: black;
+}
+/* line 5, ../../../src/styles/sass/_home.sass */
+nav.socialLinks a i {
+  font-size: 20px;
+}
+
+/* line 8, ../../../src/styles/sass/_home.sass */
+.forkme {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+/* line 17, ../../../src/styles/sass/main.sass */
 html, body {
   font-family: "Montserrat", sans-serif;
 }

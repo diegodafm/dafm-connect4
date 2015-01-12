@@ -22,14 +22,6 @@
 	</main>
 
 	<nav  ng-hide="playing">
-		<section class="speedControl">
-			<span btn-radio="'4000'" ng-model="speed" >Slow</span>
-			<span btn-radio="'2000'" ng-model="speed" >Normal</span>
-			<span btn-radio="'1000'" ng-model="speed" >Faster</span>
-			<span btn-radio="'500'" ng-model="speed" >Super Faster</span>
-
-			{{speed}}
-		</section>
 		<section class="playControl">
 			<button class="btn btn-primary" ng-click="replay()">Replay again</button>
 		</section>
