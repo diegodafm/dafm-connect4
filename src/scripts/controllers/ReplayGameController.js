@@ -41,7 +41,6 @@ angular.module('connect4')
                     move = $scope.moves[counter];
                     $scope.matrix[move.position.line][move.position.column].move = move;
                     $scope.$apply();
-                    // call next() recursively
                     next(counter, maxLoops, speed);
                 }, speed);
             })(-1, $scope.moves.length - 1, $scope.speed);
@@ -63,14 +62,17 @@ angular.module('connect4')
         };
 
         $scope.replay = function() {
+            clearMoves();
+            $scope.play();
+        };
+
+        function clearMoves() {
             for (var i = $scope.matrix.length - 1; i >= 0; i--) {
                 for (var j = $scope.matrix[i].length - 1; j >= 0; j--) {
                     delete $scope.matrix[i][j].move;
                 }
             }
-
-            $scope.play();
-        };
+        }
 
 
 

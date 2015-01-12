@@ -1,11 +1,15 @@
-<section class="" >
-	<header>
-		{{winner.nickname}}  win!
-	</header>
+<section class="winner" ng-show="isOver">
+	<div class="modal"></div>
+	<div class="view">
+		<header>
+			{{winner.nickname}}  win!
+		</header>
 
-	<nav>
-		<button class="btn btn-primary" ng-click="replay()">Replay</button>
-		<button class="btn btn-primary">Start a new game</button>
-	</nav>
+		<nav>
+			<button class="btn btn-primary" ng-click="replay()">Replay</button>
+			<button class="btn btn-primary" ng-click="reset()">Start a new game</button>
+			<button class="btn btn-primary" ng-click="changePlayers()">Change Players</button>
+		</nav>
+	</div>
 
 </section>

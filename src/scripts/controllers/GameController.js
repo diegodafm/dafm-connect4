@@ -22,34 +22,60 @@ angular.module('connect4')
         }
 
         $scope.updateLowestPiece = function(line, column) {
-            for (var i = $scope.matrix.length - 1; i >= line; i--) {
-                for (var j = 7 - 1; j >= 0; j--) {
-                    if (j === column) {
-                        if ($scope.matrix[i][j].available) {
-                            var move = {
-                                player: $scope.getCurrentPlayer(),
-                                position: {
-                                    line: i,
-                                    column: j
-                                }
-                            };
-                            MoveFactory.addMove(move);
-                            $scope.matrix[i][j].move = move;
-                            $scope.matrix[i][j].available = false;
+            if ($scope.isOver === false) {
+                for (var i = $scope.matrix.length - 1; i >= line; i--) {
+                    for (var j = 7 - 1; j >= 0; j--) {
+                        if (j === column) {
+                            if ($scope.matrix[i][j].available) {
+                                var move = {
+                                    player: $scope.getCurrentPlayer(),
+                                    position: {
+                                        line: i,
+                                        column: j
+                                    }
+                                };
+                                MoveFactory.addMove(move);
+                                $scope.matrix[i][j].move = move;
+                                $scope.matrix[i][j].available = false;
 
-                            var findWinnerMove = GameRulesService.findWinnerMove($scope.matrix);
-                            if (findWinnerMove && findWinnerMove.hasWinner) {
-                                $scope.showWinnerMove(findWinnerMove.moves);
-                                $scope.winner = findWinnerMove.winner;
-                            } else {
-                                $scope.switchPlayer();
+                                var findWinnerMove = GameRulesService.findWinnerMove($scope.matrix);
+                                if (findWinnerMove && findWinnerMove.hasWinner) {
+                                    $scope.showWinnerMove(findWinnerMove.moves);
+                                    $scope.winner = findWinnerMove.winner;
+                                    $scope.isOver = true;
+                                } else {
+                                    $scope.switchPlayer();
+                                }
+                                return;
                             }
-                            return;
                         }
                     }
                 }
             }
         };
+
+        $scope.reset = function() {
+            MoveFactory.clearMoves();
+            clearPieces();
+            $scope.startGame();
+        };
+
+        $scope.changePlayers = function() {
+            MoveFactory.clearMoves();
+            clearPieces();
+            clearPieces();
+            PlayerFactory.resetPlayers();
+            $location.path('/players');
+        };
+
+        function clearPieces() {
+            for (var i = $scope.matrix.length - 1; i >= 0; i--) {
+                for (var j = $scope.matrix[i].length - 1; j >= 0; j--) {
+                    $scope.matrix[i][j].available = true;
+                    $scope.matrix[i][j].move = null;
+                }
+            }
+        }
 
         $scope.showWinnerMove = function(moves) {
             for (var i = moves.length - 1; i >= 0; i--) {
@@ -73,6 +99,7 @@ angular.module('connect4')
         };
 
         $scope.startGame = function() {
+            $scope.isOver = false;
             if ((Math.floor(Math.random() * 2) + 1) === 1) {
                 $scope.currentPlayer = $scope.players.player2;
             } else {

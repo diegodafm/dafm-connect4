@@ -8,10 +8,10 @@
             $urlRouterProvider.otherwise('/home');
 
             $stateProvider
-                .state('test', {
-                    url: '/test',
-                    templateUrl: 'src/views/test.html',
-                    controller: 'TestController',
+                .state('home', {
+                    url: '/home',
+                    templateUrl: 'src/views/home.html',
+                    controller: 'HomeController',
                     data: {
                         pageTitle: 'Test View'
                     }

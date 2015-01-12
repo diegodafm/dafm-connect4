@@ -67,7 +67,9 @@
                             top: ($(el).offset().top * -1),
                             opacity: 0
                         }, 500, function() {
-
+                            $(el).children().each(function() {
+                                $(this).remove();
+                            });
                         });
                     }
 
@@ -90,7 +92,7 @@
                             var evalModel = scope.$eval(scope.model);
                             if (evalModel.move === null) {
                                 removePiece();
-                            } else if (evalModel.move.winnerMove) {
+                            } else if (evalModel.move && evalModel.move.winnerMove) {
                                 renderWinnerMove();
                             } else {
                                 createAnimatedPiece();

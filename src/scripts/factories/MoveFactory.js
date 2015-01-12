@@ -37,6 +37,10 @@
                         }
                     }
                     return playerMoves;
+                },
+
+                clearMoves: function() {
+                    moves = [];
                 }
 
 

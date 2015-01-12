@@ -6,14 +6,14 @@
 				<div class="row">
 					{{players.player1.nickname}}
 
-					<button userTimeout class="btn btn-primary" ng-click="undo()" ng-show="isCurrentPlayer(players.player1)">Undo</button>
+					<button userTimeout class="btn btn-primary" ng-hide="isOver" ng-click="undo()" ng-show="isCurrentPlayer(players.player1)">Undo</button>
 				</div>
 			</aside>	
 
 			<aside class="col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-show="players.player2.ready">
 				<div class="row">
 					{{players.player2.nickname}}
-					<button userTimeout class="btn btn-primary" ng-click="undo()" ng-show="isCurrentPlayer(players.player2)">Undo</button>
+					<button userTimeout class="btn btn-primary" ng-hide="isOver" ng-click="undo()" ng-show="isCurrentPlayer(players.player2)">Undo</button>
 				</div>
 			</aside>	
 
